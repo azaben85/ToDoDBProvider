@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_db_provide/data_repository/db_helper.dart';
+import 'package:todo_db_provide/providers/controller_provider.dart';
 import 'package:todo_db_provide/providers/todo_provider.dart';
 import 'package:todo_db_provide/ui/screens/todo_main_screen.dart';
 
@@ -16,12 +17,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ToDoClassProvider>(
-      create: (context) {
-        return ToDoClassProvider();
-      },
-      child: InitApp(),
-    );
+    return MultiProvider(providers: [
+      ChangeNotifierProvider<ToDoClassProvider>(
+        create: (context) {
+          return ToDoClassProvider();
+        },
+      ),
+      ChangeNotifierProvider<ControlAppProvider>(
+        create: (context) {
+          return ControlAppProvider();
+        },
+      )
+    ], child: InitApp());
+
+    // ChangeNotifierProvider<ToDoClassProvider>(
+    //   create: (context) {
+    //     return ToDoClassProvider();
+    //   },
+    //   child: InitApp(),
+    // );
   }
 }
 

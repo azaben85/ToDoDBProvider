@@ -21,12 +21,19 @@ class TaskWidget extends StatelessWidget {
           color: taskModel.isComplete! ? Colors.green : Colors.red),
       child: Row(
         children: [
+          InkWell(
+            child: Icon(Icons.delete),
+            onTap: () async {
+              await Provider.of<ToDoClassProvider>(context, listen: false)
+                  .deletTask(taskModel);
+            },
+          ),
           Text(taskModel.title!),
           Expanded(
-            child: CheckboxListTile(
+            child: Checkbox(
               value: taskModel.isComplete,
-              onChanged: (value) {
-                Provider.of<ToDoClassProvider>(context, listen: false)
+              onChanged: (value) async {
+                await Provider.of<ToDoClassProvider>(context, listen: false)
                     .updateTask(taskModel);
               },
             ),

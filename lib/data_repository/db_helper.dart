@@ -66,6 +66,7 @@ class DBHelper {
     log(taskModel.isComplete!.toString());
     bool x = !taskModel.isComplete!;
     log(x.toString());
+    log('${taskModel.id}');
     int i = await database!.update(tableName, {isCompleteColumn: (x ? 1 : 0)},
         where: 'id=?', whereArgs: [taskModel.id]);
 
